@@ -12,14 +12,53 @@ output = "output.wav"
 'Read in wavfile'
 samples = sci.read(sys.argv[1])
 sampleData = samples[1]
+sampleRate = samples[0]
 
 
-'Increase volume of wav file by multiplying the samples by a factor of 2'
-data = []
-for sample in sampleData:
-    value = sample * 2
-    data.append(value)
+# 'Increase volume of wav file by multiplying the samples by a factor of 2'
+# data = []
+# for sample in sampleData:
+#     value = sample * 4
+#     data.append(value)
+#
+# returnData = numpy.array(data)
+#
+# sci.write(output, samples[0], returnData)
 
-returnData = numpy.array(data)
+'we can add more functions here, we can also abstract these functions in other files as well'
+def increase_volume(samples,rate):
+    choice = int(input("Increase volume by a factor of how much?  "))
+    data = []
+    for sample in samples:
+        value = sample * choice
+        data.append(value)
 
-sci.write(output, samples[0], returnData)
+    returnData = numpy.array(data)
+    return returnData
+
+def decrease_volume(samples,rate):
+    choice = int(input("Decrease volume by a factor of how much?  "))
+    data = []
+    for sample in samples:
+        value = sample / choice
+        data.append(value)
+
+    returnData = numpy.array(data)
+    return returnData
+
+while True:
+    print("1. Increase volume by factor")
+    print("2. Decrease volume by factor")
+    '''
+    add more options here
+    '''
+    print("0. Quit")
+    choice = raw_input("Choose how to alter sound file: ")
+    if choice == '1':
+        sampleData = increase_volume(sampleData,sampleRate)
+    elif choice == '2':
+        sampleData = decrease_volume(sampleData,sampleRate)
+    elif choice == '0':
+        break
+
+sci.write(output, sampleRate, sampleData)
