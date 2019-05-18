@@ -1,6 +1,9 @@
 import numpy
 import scipy.io.wavfile as sci
 import sys
+
+'import functions from other files'
+from changeSpeed import increaseSpeed, decreaseSpeed
 '''
 Main file of program. It will take in a wav file as the argument and read the samples
 From there the program will augment those samples in different ways based on the users
@@ -49,6 +52,8 @@ def decrease_volume(samples,rate):
 while True:
     print("1. Increase volume by factor")
     print("2. Decrease volume by factor")
+    print("3. Increase speed by factor")
+    print("4. Decrease speed by factor")
     '''
     add more options here
     '''
@@ -58,6 +63,10 @@ while True:
         sampleData = increase_volume(sampleData,sampleRate)
     elif choice == '2':
         sampleData = decrease_volume(sampleData,sampleRate)
+    elif choice == '3':
+        sampleRate = increaseSpeed(sampleRate)
+    elif choice == '4':
+        sampleRate = decreaseSpeed(sampleRate)
     elif choice == '0':
         break
 
