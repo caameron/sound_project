@@ -5,6 +5,7 @@ import sys
 'import functions from other files'
 from changeSpeed import increaseSpeed, decreaseSpeed
 from changeVolume import increase_volume, decrease_volume
+from stereoMono import stereo_to_mono
 '''
 Main file of program. It will take in a wav file as the argument and read the samples
 From there the program will augment those samples in different ways based on the users
@@ -55,6 +56,7 @@ while True:
     print("2. Decrease volume by factor")
     print("3. Increase speed by factor")
     print("4. Decrease speed by factor")
+    print("5. Convert audio to mono")
     '''
     add more options here
     '''
@@ -68,6 +70,8 @@ while True:
         sampleRate = increaseSpeed(sampleRate)
     elif choice == '4':
         sampleRate = decreaseSpeed(sampleRate)
+    elif choice == '5':
+        sampleData = stereo_to_mono(sampleData)
     elif choice == '0':
         break
 
