@@ -63,16 +63,21 @@ while True:
     print("0. Quit")
     choice = raw_input("Choose how to alter sound file: ")
     if choice == '1':
-        sampleData = increase_volume(sampleData,sampleRate)
+        choice = int(input("Increase volume by a factor of how much?  "))
+        sampleData = increase_volume(sampleData,sampleRate,choice)
     elif choice == '2':
-        sampleData = decrease_volume(sampleData,sampleRate)
+        choice = int(input("Decrease volume by a factor of how much?  "))
+        sampleData = decrease_volume(sampleData,sampleRate,choice)
     elif choice == '3':
-        sampleRate = increaseSpeed(sampleRate)
+        choice = float(input("Increase speed of file by how much? "))
+        sampleRate = increaseSpeed(sampleRate,choice)
     elif choice == '4':
-        sampleRate = decreaseSpeed(sampleRate)
+        choice = float(input("Decrease speed of file by how much? "))
+        sampleRate = decreaseSpeed(sampleRate,choice)
     elif choice == '5':
         sampleData = stereo_to_mono(sampleData)
     elif choice == '0':
         break
 
-sci.write(output, sampleRate, sampleData)
+file_name = raw_input("What do you want the updated name of file to be? (dont include .wav)")
+sci.write(file_name +".wav", sampleRate, sampleData)

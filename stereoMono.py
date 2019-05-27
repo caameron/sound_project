@@ -6,8 +6,9 @@ def stereo_to_mono(sampleData):
     #check to see if samples are multidimensional, if not then this means there
     #is a single channel and the audio is already in mono and doesn't need
     #to be converted to mono.
-    print(dimension)
+    print("Converting to Mono please wait...")
     if dimension < 2:
+        print("already in Mono")
         return numpy.array(sampleData)
 
     data = []
