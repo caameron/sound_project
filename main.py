@@ -5,7 +5,7 @@ from scipy.signal import hilbert
 
 'import functions from other files'
 from changeSpeed import increaseSpeed, decreaseSpeed
-from filters import lowpass
+from filters import lowpass, delay
 from changeVolume import increase_volume, decrease_volume
 from stereoMono import stereo_to_mono
 '''
@@ -61,6 +61,7 @@ while True:
     print("4. Decrease speed by factor")
     print("5. Convert audio to mono")
     print("6. low pass filter (work in progress)")
+    print("7. delay")
 
     '''
     add more options here
@@ -83,6 +84,8 @@ while True:
         sampleData = stereo_to_mono(sampleData)
     elif choice == '6':
         sampleData = lowpass(sampleData, sampleRate)
+    elif choice == '7':
+        sampleData = delay(sampleData)
     elif choice == '0':
         break
 
