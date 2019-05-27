@@ -1,9 +1,11 @@
 import numpy
 import scipy.io.wavfile as sci
 import sys
+from scipy.signal import hilbert
 
 'import functions from other files'
 from changeSpeed import increaseSpeed, decreaseSpeed
+from filters import lowpass
 '''
 Main file of program. It will take in a wav file as the argument and read the samples
 From there the program will augment those samples in different ways based on the users
@@ -17,7 +19,8 @@ samples = sci.read(sys.argv[1])
 sampleData = samples[1]
 sampleRate = samples[0]
 
-
+# test = hilbert(sampleData)
+# print(test)
 # 'Increase volume of wav file by multiplying the samples by a factor of 2'
 # data = []
 # for sample in sampleData:
@@ -54,6 +57,7 @@ while True:
     print("2. Decrease volume by factor")
     print("3. Increase speed by factor")
     print("4. Decrease speed by factor")
+    print("5. low pass filter (work in progress)")
     '''
     add more options here
     '''
@@ -67,6 +71,8 @@ while True:
         sampleRate = increaseSpeed(sampleRate)
     elif choice == '4':
         sampleRate = decreaseSpeed(sampleRate)
+    elif choice == '5':
+        sampleData = lowpass(sampleData, sampleRate)
     elif choice == '0':
         break
 
