@@ -1,9 +1,11 @@
 import numpy
 import scipy.io.wavfile as sci
 import sys
+from scipy.signal import hilbert
 
 'import functions from other files'
 from changeSpeed import increaseSpeed, decreaseSpeed
+from filters import lowpass, delay, echo
 from changeVolume import increase_volume, decrease_volume
 from stereoMono import stereo_to_mono
 '''
@@ -19,44 +21,16 @@ samples = sci.read(sys.argv[1])
 sampleData = samples[1]
 sampleRate = samples[0]
 
-
-# 'Increase volume of wav file by multiplying the samples by a factor of 2'
-# data = []
-# for sample in sampleData:
-#     value = sample * 4
-#     data.append(value)
-#
-# returnData = numpy.array(data)
-#
-# sci.write(output, samples[0], returnData)
-
-'we can add more functions here, we can also abstract these functions in other files as well'
-# def increase_volume(samples,rate):
-#     choice = int(input("Increase volume by a factor of how much?  "))
-#     data = []
-#     for sample in samples:
-#         value = sample * choice
-#         data.append(value)
-#
-#     returnData = numpy.array(data)
-#     return returnData
-#
-# def decrease_volume(samples,rate):
-#     choice = int(input("Decrease volume by a factor of how much?  "))
-#     data = []
-#     for sample in samples:
-#         value = sample / choice
-#         data.append(value)
-#
-#     returnData = numpy.array(data)
-#     return returnData
-
 while True:
     print("1. Increase volume by factor")
     print("2. Decrease volume by factor")
     print("3. Increase speed by factor")
     print("4. Decrease speed by factor")
     print("5. Convert audio to mono")
+    print("6. low pass filter (work in progress)")
+    print("7. delay")
+    print("8. echo")
+
     '''
     add more options here
     '''
@@ -76,6 +50,13 @@ while True:
         sampleRate = decreaseSpeed(sampleRate,choice)
     elif choice == '5':
         sampleData = stereo_to_mono(sampleData)
+    elif choice == '6':
+        sampleData = lowpass(sampleData, sampleRate)
+    elif choice == '7':
+        choice = int(input("delay but how many miliseconds?"))
+        sampleData = delay(sampleData, choice)
+    elif choice == '8':
+        sampleData = echo(sampleData)
     elif choice == '0':
         break
 
