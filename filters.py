@@ -58,9 +58,31 @@ def echo(sampleData):
 
     for index in range(len(sampleData)):
         if(index < len(sampleData)):
-            returnData[index] = returnData[index] + sampleData[index]
+            returnData[index] = returnData[index] + (sampleData[index] / 2)
 
 
     returnData = numpy.array(returnData)
 
+    return returnData
+
+def flanger(sampleData):
+    returnData = []
+    count = 0
+    increment = 1
+    for index in range(len(sampleData)):
+        if(count == 0):
+            increment = 1
+        if(count == 30):
+            increment = -1
+
+        if(index + count < len(sampleData) and index + count >= 0):
+            returnData.append(sampleData[index - count] / 2)
+
+        count = count + increment
+
+    for index in range(len(sampleData)):
+        if(index < len(sampleData) and index < len(returnData)):
+            returnData[index] = returnData[index] + (sampleData[index] / 2)
+
+    returnData = numpy.array(returnData)
     return returnData
