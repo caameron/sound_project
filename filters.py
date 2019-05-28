@@ -3,7 +3,7 @@
 # https://stackoverflow.com/questions/24920346/filtering-a-wav-file-using-python
 import numpy
 
-
+# stil needs work
 def lowpass(sampleData, sampleRate):
     #calculate constants
     #window LENGTH with cutoff frequency of 500
@@ -18,19 +18,48 @@ def lowpass(sampleData, sampleRate):
     return mean
 
 
+# Plays regular sound twice, but delays one by a certain amount of miliseconds
 def delay(sampleData, choice):
     returnData = []
-    for int in range(choice):
+    for int in range(choice * 20):
         zero = [0, 0]
         zero = numpy.array(zero, dtype=numpy.int16)
         returnData.append(zero)
 
+    # copy over sample data to new array
     for sample in sampleData:
-        returnData.append(sample)
+        value = numpy.array(value, dtype=numpy.int16)
+        returnData.append(value)
 
     for index in range(len(sampleData)):
         if(index < len(sampleData)):
             returnData[index] = returnData[index] + sampleData[index]
+
+    returnData = numpy.array(returnData)
+
+    return returnData
+
+def echo(sampleData):
+    returnData = []
+    #Add in delay
+    for int in range(8000):
+        zero = [0,0]
+        zero = numpy.array(zero, dtype=numpy.int16)
+        returnData.append(zero)
+
+    # Add in a decay to samples
+    factor = 1
+    for index in range(len(sampleData)):
+        if(index % 10000):
+            factor = factor + 1
+        value = sampleData[index] * (1 ** factor)
+        value = numpy.array(value, dtype=numpy.int16)
+        returnData.append(value)
+
+    for index in range(len(sampleData)):
+        if(index < len(sampleData)):
+            returnData[index] = returnData[index] + sampleData[index]
+
 
     returnData = numpy.array(returnData)
 
