@@ -1,3 +1,7 @@
+# Sunanth Sakthivel and Caameron Nakasone
+# CS 510 Sound Class Project
+# Wave file Alterer
+
 import numpy
 import scipy.io.wavfile as sci
 import sys
@@ -5,7 +9,7 @@ from scipy.signal import hilbert
 
 'import functions from other files'
 from changeSpeed import increaseSpeed, decreaseSpeed
-from filters import lowpass, delay, echo, test
+from filters import lowpass, delay, repeat, flanger, invert
 from changeVolume import increase_volume, decrease_volume
 from stereoMono import stereo_to_mono
 '''
@@ -21,6 +25,13 @@ samples = sci.read(sys.argv[1])
 sampleData = samples[1]
 sampleRate = samples[0]
 
+
+# Our basic UI for the project. It is a simple command line UI that will
+# print out all the options that user can make to alter their wav file.
+# The user has to give the wav file as an argument when starting the program
+# There is then a while loop that will keep asking the user to alter their
+# file until they are satisfies. Once done it will ask for a name for their
+# new file and place it in the current directory
 while True:
     print("1. Increase volume by factor")
     print("2. Decrease volume by factor")
@@ -31,6 +42,7 @@ while True:
     print("7. delay")
     print("8. echo")
     print("9. flangerish")
+    print("10. invert")
 
     '''
     add more options here
@@ -57,9 +69,11 @@ while True:
         choice = int(input("delay but how many miliseconds?"))
         sampleData = delay(sampleData, choice)
     elif choice == '8':
-        sampleData = echo(sampleData)
+        sampleData = repeat(sampleData)
     elif choice == '9':
-        sampleData = test(sampleData)
+        sampleData = flanger(sampleData)
+    elif choice == '10':
+        sampleData = invert(sampleData)
     elif choice == '0':
         break
 
