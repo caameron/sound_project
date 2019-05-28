@@ -18,24 +18,20 @@ def lowpass(sampleData, sampleRate):
     return mean
 
 
-def delay(sampleData):
+def delay(sampleData, choice):
     returnData = []
+    for int in range(choice):
+        zero = [0, 0]
+        zero = numpy.array(zero, dtype=numpy.int16)
+        returnData.append(zero)
+
     for sample in sampleData:
         returnData.append(sample)
-        returnData.append(sample)
-        # zero = [0, 0]
-        # zero = numpy.array(zero, dtype=numpy.int16)
-        # returnData.append(zero)
-# def decrease_volume(samples,rate):
-#     choice = int(input("Decrease volume by a factor of how much?  "))
-#     data = []
-#     for sample in samples:
-#         value = sample / choice
-#         data.append(value)
-#
-#     returnData = numpy.array(data)
-#     return returnData
+
+    for index in range(len(sampleData)):
+        if(index < len(sampleData)):
+            returnData[index] = returnData[index] + sampleData[index]
+
     returnData = numpy.array(returnData)
-    # print(returnData)
-    print(len(returnData))
+
     return returnData

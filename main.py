@@ -85,7 +85,8 @@ while True:
     elif choice == '6':
         sampleData = lowpass(sampleData, sampleRate)
     elif choice == '7':
-        sampleData = delay(sampleData)
+        choice = int(input("delay but how many miliseconds?"))
+        sampleData = delay(sampleData, choice)
     elif choice == '0':
         break
 
