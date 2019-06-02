@@ -31,7 +31,7 @@ def delay(sampleData, choice):
 
     # copy over sample data to new array
     for sample in sampleData:
-        value = numpy.array(value, dtype=numpy.int16)
+        value = numpy.array(sample, dtype=numpy.int16)
         returnData.append(value)
 
     # merge original audio
