@@ -13,6 +13,7 @@ from filters import lowpass, delay, repeat, flanger, invert
 from changeVolume import increase_volume, decrease_volume
 from stereoMono import stereo_to_mono
 from monoStereo import mono_to_stereo
+from spliceSilence import splice_silence
 '''
 Main file of program. It will take in a wav file as the argument and read the samples
 From there the program will augment those samples in different ways based on the users
@@ -45,6 +46,7 @@ while True:
     print("9. flangerish")
     print("10. invert")
     print('11. Convert audio to stereo')
+    print('12. splice silence segments')
 
     '''
     add more options here
@@ -78,6 +80,8 @@ while True:
         sampleData = invert(sampleData)
     elif choice == '11':
         sampleData = mono_to_stereo(sampleData)
+    elif choice == '12':
+        sampleData = splice_silence(sampleData)
     elif choice == '0':
         break
 
