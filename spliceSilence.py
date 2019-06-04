@@ -16,6 +16,7 @@ def splice_silence(sampleData):
 
     #remove intervals of silence that are no more than an absolute value of 20
     #check to see if stereo or mono and remove appropriately.
+    print("removing intervals of silence please wait...")
     if dimension == 1:
         for i in range(length):
             if abs(sampleData[i]) < 20:
